@@ -12,11 +12,11 @@ Vagrant.configure("2") do |config|
       virtualbox.memory = 1024
       virtualbox.cpus = 2
     end
-    config.vm.provision "shell", inline: <<-SHELL
+    jenkins.vm.provision "shell", inline: <<-SHELL
       sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
-      #sudo service ssh restart
+      systemctl restart ssh
     SHELL
-    config.vm.provision "shell", path: "install_jenkins.sh"
+    jenkins.vm.provision "shell", path: "install_jenkins.sh"
   end
 
   config.vm.define "gitlab" do |gitlab|
@@ -31,9 +31,9 @@ Vagrant.configure("2") do |config|
       virtualbox.memory = 1024
       virtualbox.cpus = 1
    end
-   config.vm.provision "shell", inline: <<-SHELL
+   gitlab.vm.provision "shell", inline: <<-SHELL
       sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
-      #sudo service ssh restart
+      systemctl restart ssh
    SHELL
    gitlab.vm.provision "shell", path: "install_gitlab.sh"
   end
@@ -50,11 +50,11 @@ Vagrant.configure("2") do |config|
       virtualbox.memory = 1024
       virtualbox.cpus = 1
    end
-   config.vm.provision "shell", inline: <<-SHELL
+   bdd.vm.provision "shell", inline: <<-SHELL
       sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
-      #sudo service ssh restart
+      systemctl restart ssh
    SHELL
-   bdd.vm.provision "shell", path: "install_gitlab.sh"
+   bdd.vm.provision "shell", path: "install_bdd.sh"
   end
 
   config.vm.define "dev" do |dev|
@@ -69,9 +69,9 @@ Vagrant.configure("2") do |config|
       virtualbox.memory = 1024
       virtualbox.cpus = 1
    end
-   config.vm.provision "shell", inline: <<-SHELL
+   dev.vm.provision "shell", inline: <<-SHELL
       sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
-      #sudo service ssh restart
+      systemctl restart ssh
    SHELL
   end
 
@@ -87,9 +87,9 @@ Vagrant.configure("2") do |config|
       virtualbox.memory = 1024
       virtualbox.cpus = 1
    end
-   config.vm.provision "shell", inline: <<-SHELL
+   stage.vm.provision "shell", inline: <<-SHELL
       sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
-      #sudo service ssh restart
+      systemctl restart ssh
    SHELL
   end
 
@@ -105,9 +105,9 @@ Vagrant.configure("2") do |config|
       virtualbox.memory = 1024
       virtualbox.cpus = 1
    end
-   config.vm.provision "shell", inline: <<-SHELL
+   prod.vm.provision "shell", inline: <<-SHELL
       sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
-      #sudo service ssh restart
+      systemctl restart ssh
    SHELL
   end
 
@@ -123,9 +123,9 @@ Vagrant.configure("2") do |config|
       virtualbox.memory = 1024
       virtualbox.cpus = 1
    end
-   config.vm.provision "shell", inline: <<-SHELL
+   registry.vm.provision "shell", inline: <<-SHELL
       sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
-      #sudo service ssh restart
+      systemctl restart ssh
    SHELL
    registry.vm.provision "shell", path: "install_registry.sh"
   end
