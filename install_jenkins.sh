@@ -19,7 +19,7 @@ systemctl enable install_jenkins
 systemctl start install_jenkins
 
 echo "[3]: Ansible custom"
-sed -i 's/.*pipelining.*/pipelining = True/' /etc/ansible/ansible.cfg
+sed -i 's/.*pipelining = False.*/pipelining = True/' /etc/ansible/ansible.cfg
 sed -i 's/.*allow_world_readable_tmpfiles.*/allow_world_readable_tmpfiles = True/' /etc/ansible/ansible.cfg
 
 echo "[4]: Install docker & docker-composer"
