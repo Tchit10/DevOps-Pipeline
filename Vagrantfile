@@ -5,6 +5,7 @@ Vagrant.configure("2") do |config|
     jenkins.vm.hostname = "jenkins"
     jenkins.vm.box_url = "debian/buster64"
     jenkins.vm.network :private_network, ip: "192.168.10.2"
+    jenkins.vm.network :forwarded_port, host: 9999, guest: 8080
     jenkins.vm.provider "virtualbox" do |virtualbox|
       virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
@@ -66,7 +67,7 @@ Vagrant.configure("2") do |config|
       virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
       virtualbox.name = "dev"
-      virtualbox.memory = 1024
+      virtualbox.memory = 512
       virtualbox.cpus = 1
    end
    dev.vm.provision "shell", inline: <<-SHELL
@@ -84,7 +85,7 @@ Vagrant.configure("2") do |config|
       virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
       virtualbox.name = "stage"
-      virtualbox.memory = 1024
+      virtualbox.memory = 512
       virtualbox.cpus = 1
    end
    stage.vm.provision "shell", inline: <<-SHELL
@@ -102,7 +103,7 @@ Vagrant.configure("2") do |config|
       virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
       virtualbox.name = "prod"
-      virtualbox.memory = 1024
+      virtualbox.memory = 512
       virtualbox.cpus = 1
    end
    prod.vm.provision "shell", inline: <<-SHELL
