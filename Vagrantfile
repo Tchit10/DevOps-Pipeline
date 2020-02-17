@@ -117,11 +117,12 @@ Vagrant.configure("2") do |config|
     registry.vm.hostname = "registry"
     registry.vm.box_url = "debian/buster64"
     registry.vm.network :private_network, ip: "192.168.10.5"
+    registry.vm.network :forwarded_port, host: 5000, guest: 5000
     registry.vm.provider "virtualbox" do |virtualbox|
       virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
       virtualbox.name = "registry"
-      virtualbox.memory = 1024
+      virtualbox.memory = 512
       virtualbox.cpus = 1
    end
    registry.vm.provision "shell", inline: <<-SHELL

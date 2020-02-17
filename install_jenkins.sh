@@ -26,7 +26,7 @@ echo "[4]: Install docker & docker-composer"
 curl -fsSL https://get.docker.com | sh; >/dev/null
 usermod -aG docker jenkins # authorize docker for jenkins user
 echo "jenkins" | passwd --stdin jenkins
-curl -sL "https://github.com/docker/compose/release/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose >/dev/null
+curl -sL "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose >/dev/null
 chmod +x /usr/local/bin/docker-compose
 
 echo "[5]: Use registry without SSL"
