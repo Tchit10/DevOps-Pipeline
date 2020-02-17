@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
     gitlab.vm.box = "debian/buster64"
     gitlab.vm.hostname = "gitlab"
     gitlab.vm.box_url = "debian/buster64"
-    gitlab.vm.network :private_network, ip: "192.168.10.3"
+    gitlab.vm.network :private_network, ip: "192.168.10.10"
     gitlab.vm.provider "virtualbox" do |virtualbox|
       virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
@@ -43,12 +43,12 @@ Vagrant.configure("2") do |config|
     bdd.vm.box = "debian/buster64"
     bdd.vm.hostname = "bdd"
     bdd.vm.box_url = "debian/buster64"
-    bdd.vm.network :private_network, ip: "192.168.10.4"
+    bdd.vm.network :private_network, ip: "192.168.10.6"
     bdd.vm.provider "virtualbox" do |virtualbox|
       virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
       virtualbox.name = "bdd"
-      virtualbox.memory = 1024
+      virtualbox.memory = 512
       virtualbox.cpus = 1
    end
    bdd.vm.provision "shell", inline: <<-SHELL
@@ -62,7 +62,7 @@ Vagrant.configure("2") do |config|
     dev.vm.box = "debian/buster64"
     dev.vm.hostname = "dev"
     dev.vm.box_url = "debian/buster64"
-    dev.vm.network :private_network, ip: "192.168.10.5"
+    dev.vm.network :private_network, ip: "192.168.10.3"
     dev.vm.provider "virtualbox" do |virtualbox|
       virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
@@ -80,7 +80,7 @@ Vagrant.configure("2") do |config|
     stage.vm.box = "debian/buster64"
     stage.vm.hostname = "stage"
     stage.vm.box_url = "debian/buster64"
-    stage.vm.network :private_network, ip: "192.168.10.6"
+    stage.vm.network :private_network, ip: "192.168.10.7"
     stage.vm.provider "virtualbox" do |virtualbox|
       virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
@@ -98,7 +98,7 @@ Vagrant.configure("2") do |config|
     prod.vm.box = "debian/buster64"
     prod.vm.hostname = "prod"
     prod.vm.box_url = "debian/buster64"
-    prod.vm.network :private_network, ip: "192.168.10.7"
+    prod.vm.network :private_network, ip: "192.168.10.4"
     prod.vm.provider "virtualbox" do |virtualbox|
       virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
@@ -116,7 +116,7 @@ Vagrant.configure("2") do |config|
     registry.vm.box = "debian/buster64"
     registry.vm.hostname = "registry"
     registry.vm.box_url = "debian/buster64"
-    registry.vm.network :private_network, ip: "192.168.10.8"
+    registry.vm.network :private_network, ip: "192.168.10.5"
     registry.vm.provider "virtualbox" do |virtualbox|
       virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
