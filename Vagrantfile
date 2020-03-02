@@ -25,11 +25,12 @@ Vagrant.configure("2") do |config|
     gitlab.vm.hostname = "gitlab"
     gitlab.vm.box_url = "debian/buster64"
     gitlab.vm.network :private_network, ip: "192.168.10.10"
+    gitlab.vm.network :forwarded_port, host: 8888, guest: 80
     gitlab.vm.provider "virtualbox" do |virtualbox|
       virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
       virtualbox.name = "gitlab"
-      virtualbox.memory = 1024
+      virtualbox.memory = 2048
       virtualbox.cpus = 1
    end
    gitlab.vm.provision "shell", inline: <<-SHELL
